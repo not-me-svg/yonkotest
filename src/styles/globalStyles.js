@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     h3 { font-size: ${(props) => props.theme.baseSize ^ 4}em; }
 
     h4 { font-size: ${(props) => props.theme.baseSize ^ 3}em; }
+
+    .h-100vh { height: 100vh; }
+    .z-index-0 { z-index: 0; }
+    .z-index-1 { z-index: 1; }
 `;
 
 GlobalStyle.defaultProps = {
