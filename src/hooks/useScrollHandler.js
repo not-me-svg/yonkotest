@@ -11,16 +11,8 @@ export const useScrollHandler = () => {
 
     const onScroll = (container) => {
       const scrollCheck = window.scrollY < 10;
-      
-      if (container.scrollTop >= 10 && container.scrollTop <= 731) {
-        scrollAmount = (container.scrollTop / 100) > .2 ? (container.scrollTop / 100) : .2 ;
-      } else if (container.scrollTop < 10) {
-        scrollAmount = .2;
-      } else if (container.scrollTop > 731) {
-        scrollAmount = 1;
-      }
-      console.log('top',container.scrollTop);
-      console.log('amount',scrollAmount);
+      const scrollAmount = container.scrollTop;
+
       if (scrollCheck !== scroll) {
         setScroll(scrollAmount);
       }

@@ -5,7 +5,6 @@ import { useScrollHandler } from "../hooks/useScrollHandler";
 
 export default function Home() {
   const scroll = useScrollHandler();
-  console.log(scroll);
   return (
     <>
       <HomeWrapper>
@@ -13,9 +12,13 @@ export default function Home() {
           <div
             className={`h-100vh ${scroll > 100 ? "z-index-0" : "z-index-1"}`}
           >
-            <Yonko3D scale={scroll} />
+            <Yonko3D />
           </div>
-          <SectionEx />
+          <div
+            className={`h-100vh ${scroll > 100 ? "z-index-1" : "z-index-0"}`}
+          >
+            <SectionEx />
+          </div>
         </ScrollContainer>
       </HomeWrapper>
     </>

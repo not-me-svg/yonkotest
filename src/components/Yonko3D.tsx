@@ -3,11 +3,7 @@ import React, { Suspense, useEffect } from "react";
 import Torigate from "./Torigate";
 import { OrbitControls } from "./OrbitControls";
 
-interface Props {
-  scale: number;
-}
-
-export const Yonko3D = (props: Props) => {
+export const Yonko3D = () => {
   return (
     <>
       <Canvas
@@ -26,8 +22,8 @@ export const Yonko3D = (props: Props) => {
             castShadow
           />
 
-          {/* <CameraController value={1} /> */}
-          <Torigate scale={props.scale} position={[0, 0.1, 0]} />
+          <CameraController />
+          <Torigate scale={.2} position={[0, 0.1, 0]} />
         </Suspense>
       </Canvas>
     </>
@@ -40,10 +36,10 @@ const CameraController = () => {
     const controls = new OrbitControls(camera, gl.domElement);
     controls.zoomSpeed = -1;
     controls.enablePan = false;
-    controls.enableZoom = false;
+    controls.enableZoom = true;
     controls.enableRotate = false;
-    // controls.maxDistance = 4;
-    // controls.minDistance = 0.7;
+    controls.maxDistance = 4;
+    controls.minDistance = 0.6;
 
     return () => {
       controls.dispose();
