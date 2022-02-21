@@ -1,9 +1,10 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import Torigate from "./Torigate";
-import { OrbitControls } from "./OrbitControls";
+import { useScrollHandler } from "../hooks/useScrollHandler";
 
 export const Yonko3D = () => {
+  const {zoom} = useScrollHandler();
   return (
     <>
       <Canvas
@@ -21,7 +22,7 @@ export const Yonko3D = () => {
             intensity={1}
           />
 
-          <CameraController />
+          <CameraController position={zoom}/>
           <Torigate scale={.2} position={[0, 0.1, 0]} />
 
         </Suspense>
@@ -30,20 +31,26 @@ export const Yonko3D = () => {
   );
 };
 
-const CameraController = () => {
-  const { camera, gl } = useThree();
-  useEffect(() => {
-    const controls = new OrbitControls(camera, gl.domElement);
-    controls.zoomSpeed = -1;
-    controls.enablePan = false;
-    controls.enableZoom = true;
-    controls.enableRotate = false;
-    controls.maxDistance = 4;
-    controls.minDistance = 0.6;
+export interface Props {
+  position: number;
+}
 
-    return () => {
-      controls.dispose();
-    };
-  }, [camera, gl]);
+const CameraController = (props: Props) => {
+  const { camera, gl } = useThree();
+
+  camera.position.z = props.position;
+  // useEffect(() => {
+  //   const controls = new OrbitControls(camera, gl.domElement);
+  //   controls.zoomSpeed = -1;
+  //   controls.enablePan = false;
+  //   controls.enableZoom = true;
+  //   controls.enableRotate = false;
+  //   controls.maxDistance = 4;
+  //   controls.minDistance = 0.6;
+
+  //   return () => {
+  //     controls.dispose();
+  //   };
+  // }, [camera, gl]);
   return null;
 };

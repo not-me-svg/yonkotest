@@ -44,8 +44,9 @@ GlobalStyle.defaultProps = {
     baseSize: 1,
     fontPrimary: "Montserrat",
     fontSecondary: "Passion One",
-    primaryColor: "red",
-    backgroundColor: "blue",
+    primaryColor: "#54BAB9",
+    secondaryColor: "#E9DAC1",
+    backgroundColor: "#F7ECDE",
     textColor: "grey"
   },
 };

@@ -19,7 +19,7 @@ export default function Model({ ...props }) {
     spring: active,
     config: { mass: 5, tension: 400, friction: 50, precision: 0.0001 },
   });
-  const rotation = spring.to([0, 1], [0, Math.PI]);
+  const rotation = spring.to([0, 1], [0, Math.PI*2]);
   useLayoutEffect(() =>
     Object.values(nodes).forEach(
       (node) => (node.receiveShadow = node.castShadow = true)

@@ -2,34 +2,41 @@ import { useState, useEffect } from "react";
 
 export const useScrollHandler = () => {
   // setting initial value to true
-  const [scroll, setScroll] = useState(0.2);
+  const [scroll, setScroll] = useState(0);
+  const [zoom, setZoom] = useState(5);
+  const [shouldShowActions, setShouldShowActions] = useState(true);
+  let scl = 5;
+  let deltaY = 0;
+
 
   // running on mount
-  useEffect(() => {
-    const scrollContainer = document.getElementById("scroll-container");
-    let scrollAmount;
+  useEffect(() => {    
+    const onScroll = (deltaY) => {
+      let scrollAmount = window.pageYOffset;
+      let isScrollingUp = scrollAmount < scroll;
+      setShouldShowActions(isScrollingUp);
+      setScroll(scrollAmount);
 
-    const onScroll = (container) => {
-      const scrollCheck = window.scrollY < 10;
-      const scrollAmount = container.scrollTop;
+      scl = Math.min(0, scrollAmount/3 - 60) / 10;
 
-      if (scrollCheck !== scroll) {
-        setScroll(scrollAmount);
+      setZoom(-scl);
+      if (scl >= 0 && scl <= 5) {
+        window.removeEventListener("scroll", ()=> {})
       }
     };
 
     // setting the event handler from web API
-    scrollContainer.addEventListener("scroll", (evt) => {
-      onScroll(evt.target);
+    window.addEventListener("scroll", (e) => {
+      onScroll(deltaY);
     });
 
     // cleaning up from the web API
     return () => {
-      scrollContainer.removeEventListener("scroll", (evt) => {
-        onScroll(evt.target);
+      window.removeEventListener("scroll", () => {
+        onScroll();
       });
     };
   }, [scroll, setScroll]);
 
-  return scroll;
+  return {scroll, shouldShowActions, zoom};
 };
