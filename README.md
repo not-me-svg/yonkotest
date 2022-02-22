@@ -1,4 +1,4 @@
-# # ⛩️Frontend Developer role with Yonko# ⛩️
+# #⛩️Frontend Developer role with Yonko ⛩️#
   
 The project is built with [Create React App](https://github.com/facebook/create-react-app). 
 
